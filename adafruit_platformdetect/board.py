@@ -70,7 +70,7 @@ class Board:
         elif chip_id == chips.AM33XX:
             board_id = self._beaglebone_id()
         elif chip_id == chips.GENERIC_X86:
-            board_id = boards.GENERIC_LINUX_PC
+            board_id = self._generic_x86_id()
         elif chip_id == chips.SUN8I:
             board_id = self._armbian_id()
         elif chip_id == chips.SAMA5:
@@ -201,6 +201,25 @@ class Board:
                     return model
 
         return None
+
+    # pylint: enable=no-self-use
+
+    # pylint: disable=no-self-use
+    def _generic_x86_id(self):
+        """Try to detect the board name of the x86 SBC."""
+        board = boards.GENERIC_LINUX_PC
+
+        try:
+            # Attempt to get the product name describes in BIOS
+            # This will output the mainboard product name if the board is not SBC
+            with open("/sys/devices/virtual/dmi/id/product_name", "r") as product_name:
+                detected_name = product_name.read().rstrip()
+        except FileNotFoundError:
+            # If the file doesn't exist, it will treat
+            # this board as a generic linux PC
+            pass
+
+        return board
 
     # pylint: enable=no-self-use
 

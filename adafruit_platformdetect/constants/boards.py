@@ -335,3 +335,9 @@ _ONION_OMEGA_BOARD_IDS = (
 
 # Pine64 boards and devices
 _PINE64_DEV_IDS = (PINE64, PINEBOOK, PINEPHONE)
+
+# Generic x86 linux supported SBC
+_GENERIC_X86_BOARD_IDS = (
+    GENERIC_LINUX_PC,
+    ODROID_H2,
+)

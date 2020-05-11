@@ -414,6 +414,11 @@ class Board:
         return self.CLOCKWORK_CPI3
 
     @property
+    def any_generic_x86_board(self):
+        """Check whether the current board is any generic x86 device."""
+        return self.id in boards._GENERIC_X86_BOARD_IDS
+
+    @property
     def any_embedded_linux(self):
         """Check whether the current board is any embedded Linux device."""
         return any(

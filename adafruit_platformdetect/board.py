@@ -214,6 +214,9 @@ class Board:
             # This will output the mainboard product name if the board is not SBC
             with open("/sys/devices/virtual/dmi/id/product_name", "r") as product_name:
                 detected_name = product_name.read().rstrip()
+
+                if detected_name == "ODROID-H2":
+                    board = boards.ODROID_H2
         except FileNotFoundError:
             # If the file doesn't exist, it will treat
             # this board as a generic linux PC
